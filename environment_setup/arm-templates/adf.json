@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     
@@ -11,43 +11,35 @@
         "description": "The base name to use as prefix to create all the resources."
       }
     },
-    "location": {
+    "storageAccountType": {
       "type": "string",
-      "defaultValue": "eastus",
+      "defaultValue": "Standard_LRS",
       "allowedValues": [
-        "eastus",
-        "eastus2",
-        "southcentralus",
-        "southeastasia",
-        "westcentralus",
-        "westeurope",
-        "westus2",
-        "centralus"
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_ZRS",
+        "Premium_LRS"
       ],
       "metadata": {
-        "description": "Specifies the location for all resources."
+        "description": "Storage Account type"
       }
     },
-    "workspace": {
-      "type": "string"
-    },
-    "storageAccount": {
+    "location": {
       "type": "string",
-      "defaultValue": "[concat(toLower(parameters('baseName')), 'amlsa')]"
-    },
-  "variables": {
-    "storageAccountName": "[parameters('storageAccount')]",
-    "storageAccountType": "Standard_LRS",
-    "tenantId": "[subscription().tenantId]"
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    }
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2018-07-01",
-      "name": "[variables('storageAccountName')]",
+      "name": "[parameters('baseName')]",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "[variables('storageAccountType')]"
+        "name": "[parameters('storageAccountType')]"
       },
       "kind": "StorageV2",
       "properties": {

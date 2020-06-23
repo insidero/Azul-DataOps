@@ -2,17 +2,8 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    
     "environment": {
       "type": "string",
-      "allowedValues": [
-        "dev",
-        "staging",
-        "qa",
-        "uat",
-        "prod",
-        "production"
-      ],
       "metadata": {
         "description": "The environment name to use as suffix to create all the resources."
       }

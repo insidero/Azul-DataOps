@@ -3,6 +3,20 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "staging",
+        "qa",
+        "uat",
+        "prod",
+        "production"
+      ],
+      "metadata": {
+        "description": "The environment name to use as suffix to create all the resources."
+      }
+    },
     "baseName": {
       "type": "string",
       "maxLength": 10,
@@ -36,7 +50,7 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2018-07-01",
-      "name": "[parameters('baseName')]",
+      "name": "[concat(toLower(parameters('baseName')), parameters('environment'))]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "[parameters('storageAccountType')]"
@@ -59,7 +73,7 @@
     },
     {
       "apiVersion": "2018-06-01",
-      "name": "[parameters('baseName')]",
+      "name": "[concat(toLower(parameters('baseName')), parameters('environment'))]",
       "location": "[parameters('location')]",
       "type": "Microsoft.DataFactory/factories",
       "identity": {

@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "Covid-Tracking-NewYorkTimes"
+        },
+        "covid_tracking_newyorktimes_blobstorage_linkedservice_connectionString": {
+            "value": ""
+        },
+        "covid_tracking_newyorktimes_http_linkedservice_properties_typeProperties_url": {
+            "value": "https://raw.githubusercontent.com/"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "itemDisplayName": "Deploy an empty Storage account and an empty Azure Data Factory",
+    "description": "This template allows you to deploy a storage account and ADF",
+    "summary": "",
+    "githubUsername": "insidero",
+    "dateUpdated": "2020-06-24"
+  }

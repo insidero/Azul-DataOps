@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "factoryName": {
-            "value": "CovidTracking-Ontario"
+            "value": "ontario"
         },
         "RestService1_properties_typeProperties_url": {
             "value": "https://data.ontario.ca/"
@@ -11,7 +11,7 @@
             "value": "dev"
           },
           "baseName": {
-            "value": "azul-cicd"
+            "value": "azul"
           },
           "location": {
             "value": "eastus"

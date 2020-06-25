@@ -134,7 +134,7 @@
                     },
                     "dependsOn": [
                         "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
 
                     ]
                 },
@@ -257,7 +257,7 @@
                     },
                     "dependsOn": [
                         "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
                     ]
                 },
                 {
@@ -303,7 +303,7 @@
                     },
                     "dependsOn": [
                         "[concat(variables('factoryId'), '/linkedServices/', variables('blobStorageAccountName'))]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
 
                     ]
                 },
@@ -353,7 +353,7 @@
                     },
                     "dependsOn": [
                         "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
 
                     ]
                 },
@@ -386,7 +386,7 @@
                     },
                     "dependsOn": [
                         "[concat(variables('factoryId'), '/linkedServices/RestService1')]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
 
                     ]
                 },
@@ -1206,7 +1206,7 @@
                         "[concat(variables('factoryId'), '/datasets/csv_source_dataset')]",
                         "[concat(variables('factoryId'), '/dataflows/transformations')]",
                         "[concat(variables('factoryId'), '/datasets/json_sink_dataset')]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
 
                     ]
                 },
@@ -1324,7 +1324,7 @@
                         "[concat(variables('factoryId'), '/datasets/csv_sink_dataset')]",
                         "[concat(variables('factoryId'), '/datasets/json_sink_dataset')]",
                         "[concat(variables('factoryId'), '/datasets/parquet_sink_dataset')]",
-                        "[concat(variables('factoryId'),'/factories/',parameters('baseName'),parameters('environment'))]"
+                        parameters('factoryName')
                     ]
                 }
             ],

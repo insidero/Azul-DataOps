@@ -1238,7 +1238,7 @@
                             "authenticationType": "Anonymous"
                         }
                     },
-                    "dependsOn": []
+                    "dependsOn": ["[parameters('factoryName')]"]
                 },
                 {
                     "name": "[concat(parameters('factoryName'), '/transformations')]",

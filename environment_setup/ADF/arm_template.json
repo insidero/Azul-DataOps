@@ -87,26 +87,24 @@
                 "type": "SystemAssigned"
             },
             "resources":[  
-                {  
-                    "name":"[concat(parameters('factoryName'), '/',variables('blobStorageAccountName'))]",
-                    "type":"Microsoft.DataFactory/factories/linkedServices",
-                    "apiVersion":"2018-06-01",
-                    "properties":{  
-                        "annotations":[  
+                // {  
+                //     "name":"[concat(parameters('factoryName'), '/',variables('blobStorageAccountName'))]",
+                //     "type":"Microsoft.DataFactory/factories/linkedServices",
+                //     "apiVersion":"2018-06-01",
+                //     "properties":{  
+                //         "annotations":[  
 
-                        ],
-                        "type":"AzureBlobStorage",
-                        "typeProperties":{  
-                            "connectionString":"[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('baseName'),parameters('environment'),';AccountKey=',concat(listKeys(variables('storageAccountId'),'2015-05-01-preview').key1))]"
-                        }
-                    },
-                    "dependsOn":[  
-                        "[parameters('factoryName')]"
-                    ]
-                }],
-            "properties": {}
-        },
-        {
+                //         ],
+                //         "type":"AzureBlobStorage",
+                //         "typeProperties":{  
+                //             "connectionString":"[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('baseName'),parameters('environment'),';AccountKey=',concat(listKeys(variables('storageAccountId'),'2015-05-01-preview').key1))]"
+                //         }
+                //     },
+                //     "dependsOn":[  
+                //         "[parameters('factoryName')]"
+                //     ]
+                // }
+                {
             "name": "[concat(parameters('factoryName'), '/json_sink_dataset')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
@@ -1333,5 +1331,9 @@
                 "[concat(variables('factoryId'), '/datasets/parquet_sink_dataset')]"
             ]
         }
+                ],
+            "properties": {}
+        }
+        
     ]
 }

@@ -2,6 +2,40 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "environment": {
+            "type": "string",
+            "metadata": {
+                "description": "The environment name to use as suffix to create all the resources."
+            }
+        },
+        "baseName": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 3,
+            "metadata": {
+                "description": "The base name to use as prefix to create all the resources."
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_ZRS",
+                "Premium_LRS"
+            ],
+            "metadata": {
+                "description": "Storage Account type"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
         "factoryName": {
             "type": "string",
             "metadata": "Data Factory name",
@@ -17,9 +51,35 @@
         }
     },
     "variables": {
-        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]",
+        "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', parameters('baseName'), parameters('environment'))]"
+
     },
     "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2018-07-01",
+            "name": "[concat(toLower(parameters('baseName')), parameters('environment'))]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "kind": "StorageV2",
+            "properties": {
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "enabled": true
+                        },
+                        "file": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "supportsHttpsTrafficOnly": true
+            }
+        },
         {
             "name": "[concat(parameters('factoryName'), '/json_sink_dataset')]",
             "type": "Microsoft.DataFactory/factories/datasets",
@@ -1139,7 +1199,7 @@
                 "annotations": [],
                 "type": "AzureBlobStorage",
                 "typeProperties": {
-                    "connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+                    "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('baseName'),parameters('environment'),';AccountKey=',concat(listKeys(variables('storageAccountId'),'2015-05-01-preview').key1))]"
                 }
             },
             "dependsOn": []

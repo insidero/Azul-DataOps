@@ -88,7 +88,7 @@
             },
             "resources":[  
                 {  
-                    "name":"[concat(parameters('FactoryName'), '/',variables('blobStorageAccountName'))]",
+                    "name":"[concat(parameters('factoryName'), '/',variables('blobStorageAccountName'))]",
                     "type":"Microsoft.DataFactory/factories/linkedServices",
                     "apiVersion":"2018-06-01",
                     "properties":{  

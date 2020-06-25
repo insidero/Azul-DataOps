@@ -101,7 +101,7 @@
                         }
                     },
                     "dependsOn":[  
-                        "[parameters('FactoryName')]"
+                        "[parameters('factoryName')]"
                     ]
                 }],
             "properties": {}

@@ -1221,7 +1221,9 @@
                             "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('baseName'),parameters('environment'),';AccountKey=',concat(listKeys(variables('storageAccountId'),'2015-05-01-preview').key1))]"
                         }
                     },
-                    "dependsOn": []
+                    "dependsOn": [
+                        "[parameters('factoryName')]"
+                    ]
                 },
                 {
                     "name": "[concat(parameters('factoryName'), '/RestService1')]",

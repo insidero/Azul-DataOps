@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "factoryName": {
-            "value": "Covid-Tracking-NewYorkTimes"
+            "value": "CovidTracking-Ontario"
         },
-        "covid_tracking_newyorktimes_blobstorage_linkedservice_connectionString": {
+        "AzureBlobStorage1_connectionString": {
             "value": ""
         },
-        "covid_tracking_newyorktimes_http_linkedservice_properties_typeProperties_url": {
-            "value": "https://raw.githubusercontent.com/"
+        "RestService1_properties_typeProperties_url": {
+            "value": "https://data.ontario.ca/"
         }
     }
 }

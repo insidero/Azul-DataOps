@@ -5,15 +5,15 @@
         "factoryName": {
             "type": "string",
             "metadata": "Data Factory name",
-            "defaultValue": "Covid-Tracking-NewYorkTimes"
+            "defaultValue": "CovidTracking-Ontario"
         },
-        "covid_tracking_newyorktimes_blobstorage_linkedservice_connectionString": {
+        "AzureBlobStorage1_connectionString": {
             "type": "secureString",
-            "metadata": "Secure string for 'connectionString' of 'covid_tracking_newyorktimes_blobstorage_linkedservice'"
+            "metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
         },
-        "covid_tracking_newyorktimes_http_linkedservice_properties_typeProperties_url": {
+        "RestService1_properties_typeProperties_url": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/"
+            "defaultValue": "https://data.ontario.ca/"
         },
         "containerUri": {
             "type": "string",
@@ -42,11 +42,11 @@
                     "factoryName": {
                         "value": "[parameters('factoryName')]"
                     },
-                    "covid_tracking_newyorktimes_blobstorage_linkedservice_connectionString": {
-                        "value": "[parameters('covid_tracking_newyorktimes_blobstorage_linkedservice_connectionString')]"
+                    "AzureBlobStorage1_connectionString": {
+                        "value": "[parameters('AzureBlobStorage1_connectionString')]"
                     },
-                    "covid_tracking_newyorktimes_http_linkedservice_properties_typeProperties_url": {
-                        "value": "[parameters('covid_tracking_newyorktimes_http_linkedservice_properties_typeProperties_url')]"
+                    "RestService1_properties_typeProperties_url": {
+                        "value": "[parameters('RestService1_properties_typeProperties_url')]"
                     }
                 }
             },

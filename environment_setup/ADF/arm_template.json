@@ -133,8 +133,7 @@
                         "schema": {}
                     },
                     "dependsOn": [
-                        "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]",
-                        "[parameters('factoryName')]"
+                        "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]"
 
                     ]
                 },

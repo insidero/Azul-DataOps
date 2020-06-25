@@ -1218,6 +1218,19 @@
             ]
         },
         {
+            "name": "[concat(parameters('factoryName'), '/',variables('blobStorageAccountName'))]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobStorage",
+                "typeProperties": {
+                    "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('baseName'),parameters('environment'),';AccountKey=',concat(listKeys(variables('storageAccountId'),'2015-05-01-preview').key1))]"
+                }
+            },
+            "dependsOn": []
+        },
+        {
             "name": "[concat(parameters('factoryName'), '/RestService1')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",

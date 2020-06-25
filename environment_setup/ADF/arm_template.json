@@ -41,10 +41,7 @@
             "metadata": "Data Factory name",
             "defaultValue": "CovidTracking-Ontario"
         },
-        "AzureBlobStorage1_connectionString": {
-            "type": "secureString",
-            "metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-        },
+
         "RestService1_properties_typeProperties_url": {
             "type": "string",
             "defaultValue": "https://data.ontario.ca/"
@@ -52,8 +49,9 @@
     },
     "variables": {
         "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]",
-        "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', parameters('baseName'), parameters('environment'))]"
+        "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', parameters('baseName'), parameters('environment'))]",
 
+        "blobStorageAccountName": "[concat(parameters('baseName'), parameters('environment'))]"
     },
     "resources": [
         {
@@ -81,12 +79,22 @@
             }
         },
         {
+            "apiVersion": "2018-06-01",
+            "name": "[concat(toLower(parameters('baseName')), parameters('environment'))]",
+            "location": "[parameters('location')]",
+            "type": "Microsoft.DataFactory/factories",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {}
+        },
+        {
             "name": "[concat(parameters('factoryName'), '/json_sink_dataset')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "AzureBlobStorage1",
+                    "referenceName": "[variables('blobStorageAccountName')]",
                     "type": "LinkedServiceReference"
                 },
                 "parameters": {
@@ -125,7 +133,7 @@
                 "schema": {}
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+                "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]"
             ]
         },
         {
@@ -134,7 +142,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "AzureBlobStorage1",
+                    "referenceName": "[variables('blobStorageAccountName')]",
                     "type": "LinkedServiceReference"
                 },
                 "parameters": {
@@ -246,7 +254,7 @@
                 ]
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+                "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]"
             ]
         },
         {
@@ -255,7 +263,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "AzureBlobStorage1",
+                    "referenceName": "[variables('blobStorageAccountName')]",
                     "type": "LinkedServiceReference"
                 },
                 "parameters": {
@@ -291,7 +299,7 @@
                 "schema": []
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+                "[concat(variables('factoryId'), '/linkedServices/', variables('blobStorageAccountName'))]"
             ]
         },
         {
@@ -300,7 +308,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "AzureBlobStorage1",
+                    "referenceName": "[variables('blobStorageAccountName')]",
                     "type": "LinkedServiceReference"
                 },
                 "parameters": {
@@ -339,7 +347,7 @@
                 "schema": []
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+                "[concat(variables('factoryId'), '/linkedServices/',variables('blobStorageAccountName'))]"
             ]
         },
         {
@@ -1192,7 +1200,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+            "name": "[concat(parameters('factoryName'),variables('blobStorageAccountName'))]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {

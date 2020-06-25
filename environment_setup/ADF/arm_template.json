@@ -38,7 +38,9 @@
         },
         "factoryName": {
             "type": "string",
-            "metadata": "Data Factory name",
+            "metadata": {
+                "description": "Data factory name."
+            },
             "defaultValue": "CovidTracking-Ontario"
         },
 

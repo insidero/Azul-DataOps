@@ -56,25 +56,25 @@
                         "[parameters('dataFactoryName')]",
                         "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
                     ],
-                   "properties": {
-        "linkedServiceName": {
-            "referenceName": "ArmtemplateStorageLinkedService",
-            "type": "LinkedServiceReference"
-        },
-        "annotations": [],
-        "type": "DelimitedText",
-        "typeProperties": {
-            "location": {
-                "type": "AzureBlobStorageLocation",
-                "folderPath": "input",
-                "container": "adf-arm-demo"
-            },
-            "columnDelimiter": ",",
-            "escapeChar": "\\",
-            "quoteChar": "\""
-        },
-        "schema": []
-    }
+                    "properties": {
+                        "linkedServiceName": {
+                            "referenceName": "ArmtemplateStorageLinkedService",
+                            "type": "LinkedServiceReference"
+                        },
+                        "annotations": [],
+                        "type": "DelimitedText",
+                        "typeProperties": {
+                            "location": {
+                                "type": "AzureBlobStorageLocation",
+                                "folderPath": "input",
+                                "container": "adf-arm-demo"
+                            },
+                            "columnDelimiter": ",",
+                            "escapeChar": "\\",
+                            "quoteChar": "\""
+                        },
+                        "schema": []
+                    }
                 },
                 {
                     "type": "Microsoft.DataFactory/factories/datasets",
@@ -84,25 +84,25 @@
                         "[parameters('dataFactoryName')]",
                         "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
                     ],
-                     "properties": {
-        "linkedServiceName": {
-            "referenceName": "ArmtemplateStorageLinkedService",
-            "type": "LinkedServiceReference"
-        },
-        "annotations": [],
-        "type": "DelimitedText",
-        "typeProperties": {
-            "location": {
-                "type": "AzureBlobStorageLocation",
-                "folderPath": "output",
-                "container": "adf-arm-demo"
-            },
-            "columnDelimiter": ",",
-            "escapeChar": "\\",
-            "quoteChar": "\""
-        },
-        "schema": []
-    }
+                    "properties": {
+                        "linkedServiceName": {
+                            "referenceName": "ArmtemplateStorageLinkedService",
+                            "type": "LinkedServiceReference"
+                        },
+                        "annotations": [],
+                        "type": "DelimitedText",
+                        "typeProperties": {
+                            "location": {
+                                "type": "AzureBlobStorageLocation",
+                                "folderPath": "output",
+                                "container": "adf-arm-demo"
+                            },
+                            "columnDelimiter": ",",
+                            "escapeChar": "\\",
+                            "quoteChar": "\""
+                        },
+                        "schema": []
+                    }
                 },
                 {
                     "type": "Microsoft.DataFactory/factories/pipelines",
@@ -171,7 +171,7 @@
                         "annotations": []
                     }
                 }
-              
+
             ]
         }
     ]

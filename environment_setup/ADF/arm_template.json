@@ -3,8 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "dataFactoryName": {
-            "type": "String",
-            "metadata": "Data Factory Name"
+            "type": "String"
         },
         "dataFactoryLocation": {
             "defaultValue": "East US",

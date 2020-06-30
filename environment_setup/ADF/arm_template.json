@@ -17,18 +17,6 @@
             "metadata": {
                 "description": "Name of the Azure storage account that contains the input/output data."
             }
-        },
-        "triggerStartTime": {
-            "type": "String",
-            "metadata": {
-                "description": "Start time for the trigger."
-            }
-        },
-        "triggerEndTime": {
-            "type": "String",
-            "metadata": {
-                "description": "End time for the trigger."
-            }
         }
     },
     "variables": {
@@ -68,7 +56,7 @@
                         "[parameters('dataFactoryName')]",
                         "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
                     ],
-                    "properties": {
+                   "properties": {
         "linkedServiceName": {
             "referenceName": "ArmtemplateStorageLinkedService",
             "type": "LinkedServiceReference"
@@ -78,7 +66,8 @@
         "typeProperties": {
             "location": {
                 "type": "AzureBlobStorageLocation",
-                "container": "input"
+                "folderPath": "input",
+                "container": "adf-arm-demo"
             },
             "columnDelimiter": ",",
             "escapeChar": "\\",
@@ -95,7 +84,7 @@
                         "[parameters('dataFactoryName')]",
                         "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
                     ],
-                  "properties": {
+                     "properties": {
         "linkedServiceName": {
             "referenceName": "ArmtemplateStorageLinkedService",
             "type": "LinkedServiceReference"
@@ -105,7 +94,8 @@
         "typeProperties": {
             "location": {
                 "type": "AzureBlobStorageLocation",
-                "container": "output"
+                "folderPath": "output",
+                "container": "adf-arm-demo"
             },
             "columnDelimiter": ",",
             "escapeChar": "\\",
@@ -139,16 +129,27 @@
                                 "userProperties": [],
                                 "typeProperties": {
                                     "source": {
-                                        "type": "BinarySource",
+                                        "type": "DelimitedTextSource",
                                         "storeSettings": {
                                             "type": "AzureBlobStorageReadSettings",
-                                            "recursive": true
+                                            "recursive": true,
+                                            "wildcardFileName": "*",
+                                            "enablePartitionDiscovery": false
+                                        },
+                                        "formatSettings": {
+                                            "type": "DelimitedTextReadSettings"
                                         }
                                     },
                                     "sink": {
-                                        "type": "BinarySink",
+                                        "type": "DelimitedTextSink",
                                         "storeSettings": {
-                                            "type": "AzureBlobStorageWriteSettings"
+                                            "type": "AzureBlobStorageWriteSettings",
+                                            "copyBehavior": "PreserveHierarchy"
+                                        },
+                                        "formatSettings": {
+                                            "type": "DelimitedTextWriteSettings",
+                                            "quoteAllText": true,
+                                            "fileExtension": ".csv"
                                         }
                                     },
                                     "enableStaging": false
@@ -156,54 +157,21 @@
                                 "inputs": [
                                     {
                                         "referenceName": "ArmtemplateTestDatasetIn",
-                                        "type": "DatasetReference",
-                                        "parameters": {}
+                                        "type": "DatasetReference"
                                     }
                                 ],
                                 "outputs": [
                                     {
                                         "referenceName": "ArmtemplateTestDatasetOut",
-                                        "type": "DatasetReference",
-                                        "parameters": {}
+                                        "type": "DatasetReference"
                                     }
                                 ]
                             }
                         ],
                         "annotations": []
                     }
-                },
-                {
-                    "type": "Microsoft.DataFactory/factories/triggers",
-                    "apiVersion": "2018-06-01",
-                    "name": "[concat(parameters('dataFactoryName'), '/ArmTemplateTestTrigger')]",
-                    "dependsOn": [
-                        "[parameters('dataFactoryName')]",
-                        "[concat(variables('factoryId'), '/pipelines/ArmtemplateSampleCopyPipeline')]"
-                    ],
-                    "properties": {
-                        "annotations": [],
-                        "runtimeState": "Started",
-                        "pipelines": [
-                            {
-                                "pipelineReference": {
-                                    "referenceName": "ArmtemplateSampleCopyPipeline",
-                                    "type": "PipelineReference"
-                                },
-                                "parameters": {}
-                            }
-                        ],
-                        "type": "ScheduleTrigger",
-                        "typeProperties": {
-                            "recurrence": {
-                                "frequency": "Hour",
-                                "interval": 1,
-                                "startTime": "[parameters('triggerStartTime')]",
-                                "endTime": "[parameters('triggerEndTime')]",
-                                "timeZone": "UTC"
-                            }
-                        }
-                    }
                 }
+              
             ]
         }
     ]
